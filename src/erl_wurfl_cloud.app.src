@@ -1,0 +1,9 @@
+%% -*- mode: erlang -*-
+{application, erl_wurfl_cloud,
+    [{description, "Erlang WURFL cloud client"},
+     {vsn, "0.1.0"},
+     {registered, []},
+     {applications, [stdlib, kernel, inets]},
+     {modules, []},
+     {env, []}]
+}.
