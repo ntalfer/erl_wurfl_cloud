@@ -48,9 +48,8 @@ erl -pa ebin
 
 ...and start playing !
 
-In the example below, we have a user agent (UA) for which we request 5 capabilities.
+In the example below, we have a user agent (UA) for which we request 5 device capabilities.
 
-Erlang R15B03 (erts-5.9.3.1) [source] [smp:4:4] [async-threads:0] [kernel-poll:false]
 
 ```
 Eshell V5.9.3.1  (abort with ^G)

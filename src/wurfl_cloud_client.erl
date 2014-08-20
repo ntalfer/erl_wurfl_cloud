@@ -43,12 +43,12 @@ get_device(User_agent, Capabilities) ->
 %%%===================================================================
 %%% Internal
 %%%===================================================================
-get_device(API_key, User_agent, Capabilities) ->    
+get_device(API_key, User_agent, Capabilities) ->
     Path = get_path(Capabilities),
     Headers = [{"Authorization", "Basic " ++ base64:encode_to_string(API_key)},
 	       {"User-Agent", User_agent},
 	       {"X-Cloud-Client", ?client_version}],
-    URL = "http://" ++ ?api_server ++ Path,
+    URL = "http://" ++ string:join([?api_server, ?api_version, "json", Path], "/"),
     HTTPOptions = [{timeout, ?http_timeout}],
     Options = [],
     case httpc:request(get, {URL, Headers}, HTTPOptions, Options) of	
@@ -60,9 +60,7 @@ get_device(API_key, User_agent, Capabilities) ->
 	    Error
     end.
 
+get_path([]) ->
+    "";
 get_path(Capabilities) ->
-    V = "/" ++ ?api_version,
-    case Capabilities of
-	[] -> V ++ "/json";
-	_  -> V ++ "/json/search:(" ++ string:join(Capabilities, ",") ++ ")"
-    end.
+    "search:(" ++ string:join(Capabilities, ",") ++ ")".
